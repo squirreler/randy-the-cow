@@ -1,0 +1,25 @@
+h1 {
+    color: green;
+    display: flex;
+    justify-content: center;
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+}
+#content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+button {
+    padding: 1em;
+    background-color: blue;
+    color: white;
+    border: none;
+    margin: 1em;
+}
