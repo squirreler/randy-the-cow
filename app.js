@@ -13,33 +13,26 @@ let annoyanceCounter = 0;
 
 
 const responseList = [
-    ["*Looks at you* - you have gained its attention", "*Stares*", "*Continues Stairing*", "Looks at you with dissapointment"], //Response to say hello
+    ["*Looks at you* - you have gained its attention", "*Stares*", "*Continues Stairing*", "Looks at you with dissapointment", "*Growls*"], //Response to say hello
     ["*Confused Stairing*", "MOOOoooOOO", "MoooOOOOOOOOOOOOOUUUUnnngggh", "MOOOOOOOOOOOOOOOOOOOOO!!!!!!!!", "MOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!"], //Response to moo
     ["*Seems Supprised*", "*Appears to like it*", "MOOOOOOOOOO! *Seems happy*", "MOOooooooooooOOOOOOOOO *Snorts - probably has hand enough now*", "Seriously?"]  //Response to pet
 ];
 function printResponse() {
     let message = "";
-    let randyInnerHtml = randyText.innerHTML;
+    counterValueOffset = 1;
     const responseCounterType = getCorrectCounterType();
-    const responseCounterValue = getCorrectCounterValue();
-
-    if (annoyanceCounter > 2 && responseCounterValue > 3) {
+    const responseCounterValue = getCorrectCounterValue() - counterValueOffset;
+    if (responseCounterValue + counterValueOffset >= 6) {
         message = "Randy is annoyed!!! RUN!!!!!!!!";
         setRandyAngry();
     } else {
         message = responseList[responseCounterType][responseCounterValue];
     }
-    randyInnerHtml = message;
-}
-
-function handleAnnoyance() {
-    if(lastButtonClicked == buttonClicked) {
-        annoyanceCounter++;
-    }
+    randyText.innerHTML = message;
 }
 
 function getCorrectCounterType() {
-    switch(lastButtonClicked) {
+    switch(buttonClicked) {
         case "hello": 
             return 0;
         case "moo":
@@ -51,7 +44,7 @@ function getCorrectCounterType() {
 }
 
 function getCorrectCounterValue() {
-    switch(lastButtonClicked) {
+    switch(buttonClicked) {
         case "hello": 
             return helloCounter;
         case "moo":
@@ -63,12 +56,12 @@ function getCorrectCounterValue() {
 }
 
 function setRandyAngry() {
-    document.getElementByID("randy-img").src="randy-angry.png";
+    document.getElementById("randy-img").src="randy-angry.png";
 }
 
 
 //Button agnostic functions
-addEventListener("click", handleAnnoyance, printResponse);
+addEventListener("click", printResponse)
 //Button identification functions
 helloButton.addEventListener("click", helloClicked);
 mooButton.addEventListener("click", mooClicked);
@@ -79,17 +72,22 @@ function helloClicked() {
     lastButtonClicked = buttonClicked;
     buttonClicked = 'hello';
     helloCounter++;
+    setRandyTame()
 }
 function mooClicked() {
     lastButtonClicked = buttonClicked;
     buttonClicked = 'moo';
     mooCounter++;
+    setRandyTame()
 }
 function petClicked() {
     lastButtonClicked = buttonClicked;
     buttonClicked = 'pet';
     petCounter++;
+    setRandyTame()
 }
-
+function setRandyTame() {
+    document.getElementById("randy-img").src="randy.png";
+}
 
 
