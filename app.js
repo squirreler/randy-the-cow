@@ -18,7 +18,7 @@ const responseList = [
     ["*Seems Supprised*", "*Appears to like it*", "MOOOOOOOOOO! *Seems happy*", "MOOooooooooooOOOOOOOOO *Snorts - probably has hand enough now*", "Seriously?"]  //Response to pet
 ];
 function printResponse() {
-    let randyMessage = "";
+    let message = "";
     let randyInnerHtml = randyText.innerHTML;
     const responseCounterType = getCorrectCounterType();
     const responseCounterValue = getCorrectCounterValue();
@@ -29,7 +29,7 @@ function printResponse() {
     } else {
         message = responseList[responseCounterType][responseCounterValue];
     }
-    message = randyInnerHtml;
+    randyInnerHtml = message;
 }
 
 function handleAnnoyance() {
@@ -72,7 +72,7 @@ addEventListener("click", handleAnnoyance, printResponse);
 //Button identification functions
 helloButton.addEventListener("click", helloClicked);
 mooButton.addEventListener("click", mooClicked);
-helpetButtonloButton.addEventListener("click", petClicked);
+petButton.addEventListener("click", petClicked);
 
 //This makes me cringe
 function helloClicked() {
